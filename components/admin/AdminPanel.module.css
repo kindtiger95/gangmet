@@ -1,0 +1,140 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: flex;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / 0.25);
+  backdrop-filter: blur(1px);
+}
+
+.panel {
+  position: relative;
+  margin-left: auto;
+  background: var(--color-surface);
+  width: 100%;
+  max-width: 420px;
+  height: 100%;
+  overflow-y: auto;
+  box-shadow: var(--shadow-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.panelTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.closeBtn {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--color-text-subtle);
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+}
+.closeBtn:hover { background: var(--color-bg); color: var(--color-text); }
+
+.body { padding: 20px; display: flex; flex-direction: column; gap: 24px; }
+
+.section {}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.sectionTitle {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.inputRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.inputRow input { flex: 1; }
+
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.cardItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 13px;
+}
+
+.cardItem:last-child { border-bottom: none; }
+
+.cardItemName { color: var(--color-text); }
+.cardItemInactive { color: var(--color-text-subtle); text-decoration: line-through; }
+
+/* Employee list */
+.list { border: 1px solid var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.listItem:last-child { border-bottom: none; }
+
+.listMain { flex: 1; min-width: 0; }
+
+.listName {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.listSub { font-size: 12px; color: var(--color-text-muted); margin-top: 2px; }
+
+.emptyList {
+  text-align: center;
+  color: var(--color-text-subtle);
+  font-size: 13px;
+  padding: 20px;
+}

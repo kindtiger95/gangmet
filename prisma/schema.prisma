@@ -1,0 +1,155 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "sqlite"
+  relationMode = "prisma"
+}
+
+enum Position {
+  OWNER
+  MANAGER
+  STAFF
+}
+
+enum PayType {
+  HOURLY
+  MONTHLY
+}
+
+enum ScheduleType {
+  WORK
+  BREAK
+}
+
+enum DayType {
+  WEEKDAY
+  WEEKEND
+  HOLIDAY
+}
+
+enum ScheduleStatus {
+  PENDING
+  CONFIRMED
+  SNAPSHOT
+}
+
+enum PayrollStatus {
+  DRAFT
+  CONFIRMED
+}
+
+model Workplace {
+  id        Int      @id @default(autoincrement())
+  name      String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  employees         Employee[]
+  schedules         Schedule[]
+  settlementReports SettlementReport[]
+  payrolls          Payroll[]
+}
+
+model Employee {
+  id            Int      @id @default(autoincrement())
+  workplaceId   Int
+  name          String
+  phone         String?
+  position      Position
+  payType       PayType
+  hourlyRate    Float?
+  requiredHours Float?
+  monthlySalary Float?
+  bankName      String?
+  accountNumber String?
+  hireDate      String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  workplace         Workplace          @relation(fields: [workplaceId], references: [id])
+  schedules         Schedule[]
+  settlementReports SettlementReport[]
+  payrolls          Payroll[]
+
+  @@index([workplaceId])
+}
+
+model Schedule {
+  id           Int            @id @default(autoincrement())
+  employeeId   Int
+  workplaceId  Int
+  type         ScheduleType
+  fromDatetime String
+  toDatetime   String
+  dayType      DayType
+  status       ScheduleStatus @default(PENDING)
+  note         String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  employee  Employee  @relation(fields: [employeeId], references: [id])
+  workplace Workplace @relation(fields: [workplaceId], references: [id])
+
+  @@index([employeeId, fromDatetime])
+  @@index([workplaceId, fromDatetime])
+}
+
+model SettlementReport {
+  id                         Int      @id @default(autoincrement())
+  employeeId                 Int
+  workplaceId                Int
+  year                       Int
+  month                      Int
+  payTypeSnapshot            PayType
+  hourlyRateSnapshot         Float
+  requiredHoursSnapshot      Float?
+  monthlySalarySnapshot      Float?
+  totalWorkHours             Float    @default(0)
+  weeklyHolidayPay           Float    @default(0)
+  basePay                    Float    @default(0)
+  previousSnapshotAdjustment Float    @default(0)
+  totalPay                   Float    @default(0)
+  createdAt                  DateTime @default(now())
+
+  employee  Employee  @relation(fields: [employeeId], references: [id])
+  workplace Workplace @relation(fields: [workplaceId], references: [id])
+
+  @@unique([employeeId, year, month])
+  @@index([workplaceId, year, month])
+}
+
+model Payroll {
+  id                         Int           @id @default(autoincrement())
+  employeeId                 Int
+  workplaceId                Int
+  year                       Int
+  month                      Int
+  payTypeSnapshot            PayType
+  hourlyRateSnapshot         Float
+  requiredHoursSnapshot      Float?
+  monthlySalarySnapshot      Float?
+  totalWorkHours             Float         @default(0)
+  weeklyHolidayPay           Float         @default(0)
+  basePay                    Float         @default(0)
+  previousSnapshotAdjustment Float         @default(0)
+  totalPay                   Float         @default(0)
+  status                     PayrollStatus @default(DRAFT)
+  note                       String?
+  createdAt                  DateTime      @default(now())
+  updatedAt                  DateTime      @updatedAt
+
+  employee  Employee  @relation(fields: [employeeId], references: [id])
+  workplace Workplace @relation(fields: [workplaceId], references: [id])
+
+  @@unique([employeeId, year, month])
+  @@index([workplaceId, year, month])
+}
+
+model SystemSetting {
+  key   String @id
+  value String
+}

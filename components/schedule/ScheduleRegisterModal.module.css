@@ -1,0 +1,119 @@
+.hourMarks {
+  position: relative;
+  height: 16px;
+  margin-bottom: 2px;
+}
+
+.hourMark {
+  position: absolute;
+  font-size: 9px;
+  color: var(--color-text-subtle);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.dragLabel {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary-text);
+  background: var(--color-primary-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.slotGrid {
+  display: flex;
+  height: 44px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  user-select: none;
+  cursor: crosshair;
+}
+
+.slot {
+  flex: 1;
+  border-right: 1px solid rgba(0, 0, 0, 0.04);
+  background: var(--color-bg);
+  transition: none;
+}
+
+.slot:last-child {
+  border-right: none;
+}
+
+/* 매 2슬롯(1시간) 경계선 강조 */
+.slotHourBorder {
+  border-left: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.slotWork {
+  background: var(--color-primary);
+  opacity: 0.75;
+}
+
+.slotBreak {
+  background: var(--color-warning);
+  opacity: 0.75;
+}
+
+.slotDragWork {
+  background: var(--color-primary);
+  opacity: 0.35;
+}
+
+.slotDragBreak {
+  background: var(--color-warning);
+  opacity: 0.35;
+}
+
+.offBadge {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-subtle);
+  letter-spacing: 0.12em;
+  padding: 6px 0;
+}
+
+.blockList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.blockItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 12px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+}
+
+.blockWork {
+  background: var(--color-primary-light);
+  color: var(--color-primary-text);
+}
+
+.blockBreak {
+  background: var(--color-warning-light);
+  color: var(--color-warning-text);
+}
+
+.removeBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 11px;
+  color: inherit;
+  opacity: 0.6;
+  padding: 2px 5px;
+  border-radius: var(--radius-sm);
+  line-height: 1;
+}
+
+.removeBtn:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.07);
+}

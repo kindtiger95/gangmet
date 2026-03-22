@@ -1,0 +1,85 @@
+.cell {
+  min-height: 100px;
+  padding: 6px;
+  border-bottom: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  background: var(--color-surface);
+  cursor: pointer;
+  transition: background 0.1s;
+  vertical-align: top;
+}
+
+.cell:hover { background: var(--color-primary-light); }
+
+.cellOtherMonth { background: var(--color-bg); opacity: 0.6; }
+
+.dateNum {
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 4px;
+  flex-shrink: 0;
+}
+
+.today { background: var(--color-primary); color: #fff; font-weight: 700; }
+.weekend { color: #e11d48; }
+
+.chips { display: flex; flex-direction: column; gap: 3px; }
+
+.more { font-size: 10px; color: var(--color-text-subtle); margin-top: 1px; }
+
+.empRow {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.empName {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.empSummary {
+  font-size: 9px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.miniBar {
+  position: relative;
+  height: 5px;
+  background: var(--color-border);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.miniBarSeg {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  border-radius: 99px;
+}
+
+.miniBarWork {
+  background: var(--color-primary);
+  opacity: 0.85;
+}
+
+.miniBarBreak {
+  background: var(--color-warning);
+  opacity: 0.85;
+}

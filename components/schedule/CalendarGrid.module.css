@@ -1,0 +1,83 @@
+.calendar {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.dayHeaders {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dayHeader {
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 8px 0;
+  color: var(--color-text-muted);
+}
+
+.dayHeader:nth-child(6) { color: var(--color-primary); } /* 토 */
+.dayHeader:nth-child(7) { color: #e11d48; }              /* 일 */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+/* Modal detail styles */
+.detailList { display: flex; flex-direction: column; gap: 8px; }
+
+.detailItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detailEmpName {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  white-space: nowrap;
+  flex: 1;
+}
+
+.detailChips {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detailChipRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.detailNote {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-text-subtle);
+  font-size: 13px;
+  padding: 24px 0;
+}
