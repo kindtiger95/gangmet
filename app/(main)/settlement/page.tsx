@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { useAppContext } from '@/store/app-context';
 import { Employee, Payroll, SettlementReport } from '@/lib/types';
 import PayrollTable from '@/components/settlement/PayrollTable';
+import ScheduleCompareView from '@/components/settlement/ScheduleCompareView';
 
-type SubTab = 'payrolls' | 'settlement';
+type SubTab = 'payrolls' | 'settlement' | 'compare';
 
 export default function SettlementPage() {
   const { selectedWorkplaceId, currentYear, currentMonth } = useAppContext();
@@ -31,7 +32,7 @@ export default function SettlementPage() {
     return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 300, color: 'var(--color-text-subtle)', fontSize: 14 }}>상단에서 사업장을 선택해주세요.</div>;
   }
 
-  const rows = subTab === 'payrolls' ? payrolls : settlements;
+  const rows = subTab === 'compare' ? [] : subTab === 'payrolls' ? payrolls : settlements;
   const totalPay = rows.reduce((sum, r) => sum + r.totalPay, 0);
 
   const tabStyle = (key: SubTab) => ({
@@ -42,7 +43,6 @@ export default function SettlementPage() {
     fontSize: 13,
     fontWeight: subTab === key ? 600 : 400,
     color: subTab === key ? 'var(--color-primary)' : 'var(--color-text-muted)',
-    borderBottom: `2px solid ${subTab === key ? 'var(--color-primary)' : 'transparent'}`,
     cursor: 'pointer' as const,
     background: 'none',
     border: 'none',
@@ -70,8 +70,18 @@ export default function SettlementPage() {
         <div style={{ display: 'flex', borderBottom: '1px solid var(--color-border)', padding: '0 4px' }}>
           <button style={tabStyle('payrolls')} onClick={() => setSubTab('payrolls')}>급여내역</button>
           <button style={tabStyle('settlement')} onClick={() => setSubTab('settlement')}>정산내역</button>
+          <button style={tabStyle('compare')} onClick={() => setSubTab('compare')}>스냅샷 비교</button>
         </div>
-        <PayrollTable rows={rows} employees={employees} showStatus={subTab === 'payrolls'} />
+        {subTab === 'compare' ? (
+          <ScheduleCompareView
+            workplaceId={selectedWorkplaceId}
+            year={currentYear}
+            month={currentMonth}
+            employees={employees}
+          />
+        ) : (
+          <PayrollTable rows={rows} employees={employees} showStatus={subTab === 'payrolls'} />
+        )}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 import { scheduleRepo } from '@/lib/repositories/schedule';
 import { prisma } from '@/lib/prisma';
 import { calcDayType } from '@/lib/schedule-utils';
-import { DayType, ScheduleType } from '@prisma/client';
+import { DayType, ScheduleStatus, ScheduleType } from '@prisma/client';
 
 export async function GET(request: NextRequest) {
   const p = request.nextUrl.searchParams;
@@ -14,6 +14,7 @@ export async function GET(request: NextRequest) {
     employeeId: p.get('employee_id') ? Number(p.get('employee_id')) : undefined,
     year: Number(year),
     month: Number(month),
+    status: (p.get('status') as ScheduleStatus) ?? undefined,
   });
   return Response.json(rows);
 }
